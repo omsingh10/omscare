@@ -151,6 +151,30 @@ class _InventoryScreenState extends State<InventoryScreen> {
     }
   }
 
+  Future<void> _seedSamples() async {
+    if (_processing) return;
+
+    setState(() => _processing = true);
+
+    try {
+      final insertedMedicines =
+          await DatabaseHelper.seedSampleMedicines(force: true);
+      final insertedBatches =
+          await DatabaseHelper.seedSampleBatches(force: true);
+
+      await _loadMedicines();
+      _showSnack(
+        'Added $insertedMedicines medicines and $insertedBatches batches.',
+      );
+    } catch (error) {
+      _showSnack('Seed failed: $error');
+    } finally {
+      if (mounted) {
+        setState(() => _processing = false);
+      }
+    }
+  }
+
   void _showSnack(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message)),
@@ -163,6 +187,11 @@ class _InventoryScreenState extends State<InventoryScreen> {
       appBar: AppBar(
         title: const Text('Inventory'),
         actions: [
+          IconButton(
+            tooltip: 'Seed samples',
+            icon: const Icon(Icons.auto_awesome_outlined),
+            onPressed: _processing ? null : _seedSamples,
+          ),
           IconButton(
             tooltip: 'Import CSV',
             icon: const Icon(Icons.file_upload_outlined),
