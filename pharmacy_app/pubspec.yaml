@@ -1,0 +1,50 @@
+name: pharmacy_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Database (Windows-compatible SQLite)
+  sqflite_common_ffi: ^2.3.0
+  sqlite3_flutter_libs: ^0.5.15
+  path_provider: ^2.1.1
+  path: ^1.8.3
+
+  # Google Drive Backup
+  googleapis: ^13.1.0
+  googleapis_auth: ^1.4.1
+  http: ^1.1.0
+
+  # Email
+  mailer: ^6.0.1
+
+  # PDF & Printing
+  pdf: ^3.10.4
+  printing: ^5.11.1
+  # esc_pos_printer: ^4.1.0
+
+  # CSV & File Picker
+  csv: ^6.0.0
+  file_picker: ^11.0.2
+
+  # State management
+  provider: ^6.1.1
+
+  # Date formatting
+  intl: ^0.18.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/service_account.json
