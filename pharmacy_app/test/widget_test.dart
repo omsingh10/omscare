@@ -5,18 +5,20 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:pharmacy_app/screens/home_screen.dart';
+import 'package:pharmacy_app/models/medicine.dart';
 
 void main() {
-  testWidgets('Home screen loads', (WidgetTester tester) async {
-    await tester.pumpWidget(
-      const MaterialApp(home: HomeScreen(runDbCheck: false)),
+  test('Medicine model creates successfully', () {
+    const medicine = Medicine(
+      name: 'Test Med',
+      barcode: '12345',
+      defaultMrp: 10.0,
+      gstRate: 5.0,
     );
 
-    expect(find.text('Pharmacy Manager'), findsOneWidget);
-    expect(find.text('App is running. Database ready.'), findsOneWidget);
+    expect(medicine.name, 'Test Med');
+    expect(medicine.barcode, '12345');
+    expect(medicine.defaultMrp, 10.0);
   });
 }

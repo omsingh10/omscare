@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharmacy_app/screens/backup_restore_screen.dart';
 import 'package:pharmacy_app/screens/customers_screen.dart';
 import 'package:pharmacy_app/screens/email_settings_screen.dart';
 import 'package:pharmacy_app/screens/inventory_screen.dart';
@@ -148,6 +149,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 icon: const Icon(Icons.email_outlined),
                 label: const Text('Email Settings'),
+              ),
+            ),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: 220,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const BackupRestoreScreen(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.cloud_sync_outlined),
+                label: const Text('Backup & Restore'),
               ),
             ),
           ],

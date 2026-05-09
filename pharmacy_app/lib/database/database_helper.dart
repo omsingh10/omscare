@@ -484,6 +484,32 @@ class DatabaseHelper {
     return rows.map(SalesSummary.fromMap).toList();
   }
 
+  static Future<List<Map<String, dynamic>>> getLowStockMedicines({int threshold = 10}) async {
+    final db = await database;
+    return db.rawQuery('''
+      SELECT m.id, m.name, m.barcode, COALESCE(SUM(b.quantity), 0) AS total_quantity 
+      FROM medicines m 
+      LEFT JOIN batches b ON m.id = b.medicine_id 
+      GROUP BY m.id 
+      HAVING total_quantity < ?
+      ORDER BY total_quantity ASC
+    ''', [threshold]);
+  }
+
+  static Future<List<Map<String, dynamic>>> getExpiringBatches({int days = 60}) async {
+    final db = await database;
+    final targetDate = DateTime.now().add(Duration(days: days));
+    final targetDateStr = targetDate.toIso8601String().split('T').first;
+    
+    return db.rawQuery('''
+      SELECT b.id, b.batch_number, b.expiry_date, b.quantity, m.name as medicine_name 
+      FROM batches b 
+      JOIN medicines m ON b.medicine_id = m.id 
+      WHERE date(b.expiry_date) <= date(?) AND b.quantity > 0 
+      ORDER BY date(b.expiry_date) ASC
+    ''', [targetDateStr]);
+  }
+
   static List<Medicine> _sampleMedicines() {
     return const [
       Medicine(
@@ -574,17 +600,25 @@ class DatabaseHelper {
         'barcode': '8901234500043',
         'batch_number': 'PTZ24D',
         'expiry_date': '2027-06-30',
-        'quantity': 40,
+        'quantity': 4, // Low stock
         'mrp': 65.0,
         'purchase_rate': 45.0,
       },
       {
         'barcode': '8901234500050',
         'batch_number': 'AMX24E',
-        'expiry_date': '2027-11-30',
+        'expiry_date': '2023-11-30', // Expired
         'quantity': 30,
         'mrp': 95.0,
         'purchase_rate': 70.0,
+      },
+      {
+        'barcode': '8901234500050',
+        'batch_number': 'AMX25F',
+        'expiry_date': DateTime.now().add(const Duration(days: 15)).toIso8601String().split('T').first, // Expiring soon
+        'quantity': 15,
+        'mrp': 98.0,
+        'purchase_rate': 72.0,
       },
     ];
   }
