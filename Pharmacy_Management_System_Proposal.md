@@ -1,7 +1,7 @@
 # Pharmacy Management System Proposal
 
 ## 1. Problem Statement
-Small and independent retail pharmacies in India typically rely on manual paper‑based registers or basic spreadsheets to manage their daily operations. This leads to several critical problems:
+Small and independent retail pharmacies in India typically rely on manual paper‑based registers or basic spreadsheets to manage their daily operations. This leads to several critical problems:   
 
 - **Inventory Chaos:** Expiry dates and batch numbers are tracked manually, resulting in frequent sale of expired medicines, stock‑outs of fast‑moving items, and over‑stocking of low‑demand drugs.
 - **Slow Billing & Errors:** Without barcode scanning, the cashier types medicine names by hand, causing long queues, pricing mistakes, and incorrect tax calculations.
