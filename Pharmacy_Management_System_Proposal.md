@@ -5,6 +5,8 @@ Small and independent retail pharmacies in India typically rely on manual paper�
 
 - **Inventory Chaos:** Expiry dates and batch numbers are tracked manually, resulting in frequent sale of expired medicines, stock‑outs of fast‑moving items, and over‑stocking of low‑demand drugs.
 - **Slow Billing & Errors:** Without barcode scanning, the cashier types medicine names by hand, causing long queues, pricing mistakes, and incorrect tax calculations.
+
+- 
 - **No Unified Data:** Customer purchase history, sales reports, and purchase records exist in scattered physical files or disparate Excel sheets. Generating GST‑ready reports or daily summaries is time‑consuming and error‑prone.
 - **No Off‑site Backup:** In the event of computer failure, theft, or fire, all business data is lost permanently, as there is no automated, secure, off‑site backup mechanism.
 - **Zero Cost–Sensitivity:** Most existing pharmacy software solutions require expensive monthly subscriptions, cloud hosting, or proprietary hardware that small shops cannot afford.
